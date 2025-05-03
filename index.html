@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAD Boutique</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #12372A;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8em;
+      color: #F3BCC8;
+      margin: 0;
+    }
+    nav {
+      text-align: center;
+      background: #1F2E2E;
+    }
+    nav a {
+      display: inline-block;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+    }
+    nav a:hover {
+      background-color: #355E3B;
+    }
+    .carrito-icono {
+        float: right;
+      font-size: 24px;
+      text-decoration: none;
+      color: white;
+    }
+    main {
+      padding: 20px;
+    }
+    h2 {
+      color: #12372A;
+      text-align: center;
+    }
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .producto {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .producto button {
+      background-color: #12372A;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 10px;
+      background-color: #12372A;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GAD Boutique</h1>
+    <a href="carrito.html" class="carrito-icono">🛒</a>
+  </header>
+
+  <main>
+    <h2>Catálogo de Ropa de Dama</h2>
+    <div class="catalogo">
+      <div class="producto">
+        <h3>Pantalón de Mezclilla</h3>
+        <p>Clásico y cómodo.</p>
+        <p><strong>$350.00</strong></p>
+        <button onclick="agregarAlCarrito('Pantalón de Mezclilla', 350)">Agregar al carrito</button>
+      </div>
+      <div class="producto">
+        <h3>Vestido Casual</h3>
+        <p>Ideal para cualquier ocasión.</p>
+        <p><strong>$450.00</strong></p>
+        <button onclick="agregarAlCarrito('Vestido Casual', 450)">Agregar al carrito</button>
+      </div>
+      <!-- Puedes agregar más productos aquí -->
+    </div>
+  </main>
+
+  <footer>
+    <p>Síguenos en <a href="https://www.instagram.com/gad.boutique" target="_blank" style="color: white; text-decoration: underline;">@gad.boutique</a></p>
+  </footer>
+
+  <script>
+    function agregarAlCarrito(nombre, precio) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      let index = carrito.findIndex(item => item.nombre === nombre);
+
+      if (index > -1) {
+        carrito[index].cantidad++;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1 });
+      }
+
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      alert(nombre + ' fue agregado al carrito.');
+    }
+  </script>
+</body>
+</html>
+
