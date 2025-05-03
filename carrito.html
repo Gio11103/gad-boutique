@@ -8,34 +8,64 @@
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       background-color: #f9f9f9;
+      color: #333;
     }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      color: #12372A;
+
+    header {
+      background-color: #12372A;
+      color: white;
+      padding: 20px;
       text-align: center;
     }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      color: #F3BCC8;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #12372A;
+      font-family: 'Playfair Display', serif;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
       background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     th, td {
       padding: 12px;
       text-align: left;
       border-bottom: 1px solid #ccc;
     }
+
     th {
       background-color: #12372A;
       color: white;
     }
+
     .total {
       text-align: right;
       margin-top: 20px;
       font-size: 1.2em;
+      color: #12372A;
     }
+
     .volver {
       display: inline-block;
       margin-top: 30px;
@@ -45,6 +75,7 @@
       text-decoration: none;
       border-radius: 5px;
     }
+
     .vaciar {
       float: right;
       background-color: #a00;
@@ -53,7 +84,9 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      margin-top: 10px;
     }
+
     .eliminar {
       background-color: #a00;
       color: white;
@@ -62,28 +95,46 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 10px;
+      background-color: #12372A;
+      color: white;
+    }
   </style>
 </head>
 <body>
-  <h1>Carrito de Compras</h1>
-  <button class="vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
-  <table id="tabla-carrito">
-    <thead>
-      <tr>
-        <th>Producto</th>
-        <th>Precio</th>
-        <th>Cantidad</th>
-        <th>Subtotal</th>
-        <th>Eliminar</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Aquí se insertan los productos -->
-    </tbody>
-  </table>
-  <div class="total" id="total">Total: $0.00</div>
+  <header>
+    <h1>GAD Boutique</h1>
+  </header>
 
-  <a class="volver" href="index.html">← Volver al catálogo</a>
+  <main>
+    <h2>Carrito de Compras</h2>
+    <button class="vaciar" onclick="vaciarCarrito()">Vaciar carrito</button>
+    <table id="tabla-carrito">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Subtotal</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Aquí se insertan los productos -->
+      </tbody>
+    </table>
+    <div class="total" id="total">Total: $0.00</div>
+
+    <a class="volver" href="index.html">← Volver al catálogo</a>
+  </main>
+
+  <footer>
+    <p>Síguenos en <a href="https://www.instagram.com/gad.boutique" target="_blank" style="color: white; text-decoration: underline;">@gad.boutique</a></p>
+  </footer>
 
   <script>
     function cargarCarrito() {
@@ -111,9 +162,9 @@
 
     function eliminarProducto(index) {
       let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-      carrito.splice(index, 1); // Elimina el producto en el índice indicado
-      localStorage.setItem('carrito', JSON.stringify(carrito)); // Guarda el carrito actualizado
-      cargarCarrito(); // Recarga el carrito actualizado
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      cargarCarrito();
     }
 
     function vaciarCarrito() {
