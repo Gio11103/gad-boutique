@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GAD Boutique</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
@@ -17,13 +16,31 @@
       background-color: #12372A;
       color: #fff;
       padding: 20px;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     header h1 {
       font-family: 'Playfair Display', serif;
       font-size: 2.8em;
       color: #F3BCC8;
       margin: 0;
+    }
+    .carrito-icono {
+      font-size: 24px;
+      text-decoration: none;
+      color: white;
+      position: relative;
+    }
+    .contador {
+      position: absolute;
+      top: -10px;
+      right: -15px;
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 50%;
     }
     nav {
       text-align: center;
@@ -37,12 +54,6 @@
     }
     nav a:hover {
       background-color: #355E3B;
-    }
-    .carrito-icono {
-        float: right;
-      font-size: 24px;
-      text-decoration: none;
-      color: white;
     }
     main {
       padding: 20px;
@@ -84,7 +95,9 @@
 <body>
   <header>
     <h1>GAD Boutique</h1>
-    <a href="carrito.html" class="carrito-icono">🛒</a>
+    <a href="carrito.html" class="carrito-icono">
+      🛒 <span class="contador" id="contador">0</span>
+    </a>
   </header>
 
   <main>
@@ -122,9 +135,18 @@
       }
 
       localStorage.setItem('carrito', JSON.stringify(carrito));
+      actualizarContador();
       alert(nombre + ' fue agregado al carrito.');
     }
+
+    function actualizarContador() {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      let total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+      document.getElementById('contador').textContent = total;
+    }
+
+    // Al cargar la página, actualizar el contador
+    actualizarContador();
   </script>
 </body>
 </html>
-
